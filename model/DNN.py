@@ -114,7 +114,7 @@ def build_model():
 model = build_model()
 model.summary()
 
-# 🔧 6. 모델 학습
+# 모델 학습
 history = model.fit(
     X_train_splits, y_train,
     validation_data=(X_val_splits, y_val),
@@ -123,7 +123,7 @@ history = model.fit(
     verbose=1
 )
 
-# 🔧 7. 모델 평가
+# 모델 평가
 train_loss, train_acc = model.evaluate(X_train_splits, y_train, verbose=0)
 val_loss, val_acc = model.evaluate(X_val_splits, y_val, verbose=0)
 test_loss, test_acc = model.evaluate(X_test_splits, y_test, verbose=0)
@@ -132,7 +132,7 @@ print(f"Train Accuracy: {train_acc:.4f}, Train Loss: {train_loss:.4f}")
 print(f"Validation Accuracy: {val_acc:.4f}, Validation Loss: {val_loss:.4f}")
 print(f"Test Accuracy: {test_acc:.4f}, Test Loss: {test_loss:.4f}")
 
-# 🔧 8. 학습 시각화
+# 학습 시각화
 plt.figure(figsize=(10, 4))
 plt.subplot(1, 2, 1)
 plt.plot(history.history['accuracy'], label='Train Accuracy')

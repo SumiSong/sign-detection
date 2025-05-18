@@ -137,10 +137,9 @@ history = model.fit(
 # 모델 평가
 train_loss, train_acc = model.evaluate(X_train, y_train)
 val_loss, val_acc = model.evaluate(X_val, y_val)
-print(f"Train acc: {train_acc:.4f}, Validation acc: {val_acc:.4f}")
-
-# 테스트
 test_loss, test_acc = model.evaluate(X_test, y_test)
+print(f"Train acc: {train_acc:.4f}, Train loss: {train_loss:.4f}")
+print(f"Val acc: {train_acc:.4f}, Val loss: {val_loss:.4f}")
 print(f"Test acc: {test_acc:.4f}, Test loss: {test_loss:.4f}")
 
 # 시각화(테스트, 검증)
