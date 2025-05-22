@@ -64,3 +64,5 @@ for index, row in df.iterrows():
 df.to_csv(output_csv, index=False, encoding='utf-8')
 
 print(f"라벨 추가 완료: {output_csv}")
+
+

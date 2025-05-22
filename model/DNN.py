@@ -1,3 +1,4 @@
+import joblib
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -73,6 +74,15 @@ label_encoder = LabelEncoder()
 y_train = label_encoder.fit_transform(y_train)
 y_val = label_encoder.transform(y_val)
 y_test = label_encoder.transform(y_test)
+
+joblib.dump(label_encoder, "label_encoder.pkl")
+
+df_labels = pd.DataFrame({
+    'index': list(range(len(label_encoder.classes_))),
+    'label': label_encoder.classes_
+})
+
+df_labels.to_csv("label_index.csv", index=False, encoding='utf-8')
 
 
 
