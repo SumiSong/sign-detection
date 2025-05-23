@@ -82,7 +82,7 @@ df_labels = pd.DataFrame({
     'label': label_encoder.classes_
 })
 
-df_labels.to_csv("label_index.csv", index=False, encoding='utf-8')
+#df_labels.to_csv("label_index1.csv", index=False, encoding='utf-8')
 
 
 
@@ -133,7 +133,7 @@ history = model.fit(
     verbose=1
 )
 
-model.save("C:/Users/mjson/PycharmProjects/sign-detection/model/sign_dnn_model2.h5")
+model.save("C:/Users/mjson/PycharmProjects/sign-detection/model/sign_dnn_model.h5")
 print("모델 저장")
 
 # 모델 평가
@@ -161,22 +161,22 @@ for i in random_indices:
 
 
 # 학습 시각화
-# plt.figure(figsize=(10, 4))
-# plt.subplot(1, 2, 1)
-# plt.plot(history.history['accuracy'], label='Train Accuracy')
-# plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-# plt.title("Accuracy")
-# plt.xlabel("Epoch")
-# plt.ylabel("Accuracy")
-# plt.legend()
-#
-# plt.subplot(1, 2, 2)
-# plt.plot(history.history['loss'], label='Train Loss')
-# plt.plot(history.history['val_loss'], label='Validation Loss')
-# plt.title("Loss")
-# plt.xlabel("Epoch")
-# plt.ylabel("Loss")
-# plt.legend()
-#
-# plt.tight_layout()
-# plt.show()
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Train Acc')
+plt.plot(history.history['val_accuracy'], label='Validation Acc')
+plt.title("Accuracy")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy")
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title("Loss")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.legend()
+
+plt.tight_layout()
+plt.show()

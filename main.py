@@ -7,7 +7,7 @@
 #     "right_hand": [42개 값],
 #     "face": [140개 값]
 # }
-
+import joblib
 from flask import Flask, request, jsonify
 import numpy as np
 from tensorflow.python.keras.saving.save import load_model
@@ -15,7 +15,11 @@ from tensorflow.python.keras.saving.save import load_model
 app = Flask(__name__)
 
 # 모델 로드
-model = load_model("sign_dnn_model.h5")
+model = load_model("model/v4/sign_dnn_model.h5")
+
+# 학습 시 저장해둔 label encoder 불러오기
+# inverse_transform()을 사용하기 위해 객체 사용
+label_encoder = joblib.load("model/v4/label_encoder.pkl")
 
 # 에측
 @app.route('/predict', methods=['POST'])
@@ -29,9 +33,11 @@ def predict():
         face = np.array(data['face']).reshape(1, -1)
 
         # # 예측
-        # predict = model.predict([pose, left_hand, right_hand, face])
-        # pred_index = np.argmax(predict)
-        # word =
+        predict = model.predict([pose, left_hand, right_hand, face])
+        pred_index = np.argmax(predict)
+        word = label_encoder.inverse_transform([pred_index])[0]
+
+        return jsonify({'predict': word})
     except Exception as e:
         return jsonify({'error': str(e)})
 
