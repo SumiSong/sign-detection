@@ -32,12 +32,18 @@ def predict():
         right_hand = np.array(data['right_hand']).reshape(1, -1)
         face = np.array(data['face']).reshape(1, -1)
 
-        # # 예측
+        # 예측값 전달
         predict = model.predict([pose, left_hand, right_hand, face])
-        pred_index = np.argmax(predict)
-        word = label_encoder.inverse_transform([pred_index])[0]
+        confidence = np.max(predict) #가장 높은 확률값
+        pred_index = np.argmax(predict) #가장 확률이 높은 클래스 번호 반환
 
-        return jsonify({'predict': word})
+
+        if confidence >= 0.8:
+            word = label_encoder.inverse_transform([pred_index])[0]
+            return jsonify({'prediction': word, 'confidence': float(confidence)})
+        else:
+            return jsonify({'prediction': None, 'confidence': float(confidence)})
+
     except Exception as e:
         return jsonify({'error': str(e)})
 
